@@ -18,24 +18,40 @@ function App() {
           "pikachu",
           "pichu",
           "plusle",
-          "minun", // Similar Electric
+          "minun",
+          "magnemite",
+          "magneton",
+          "voltorb",
+          "electrode",
           "venonat",
-          "butterfree", // Similar Bug/Psychic
-          "ekans",
-          "arbok", // Similar Poison
+          "butterfree",
+          "beedrill",
+          "paras",
+          "parasect",
+          "weedle",
+          "kakuna",
+          "koffing",
+          "weezing",
+          "gastly",
           "growlithe",
-          "arcanine", // Similar Fire
-          "meowth",
-          "persian", // Similar Normal
-          "doduo",
-          "dodrio", // Similar Normal/Flying
-          "squirtle",
+          "arcanine",
           "charmander",
-          "bulbasaur", // Starters (for variety)
+          "charmeleon",
+          "charizard",
+          "vulpix",
+          "ninetales",
+          "flareon",
+          "meowth",
+          "persian",
+          "squirtle",
+          "wartortle",
+          "blastoise",
+          "bulbasaur",
+          "ivysaur",
+          "venusaur",
         ];
 
-        // Ensure we only fetch 16, even if the array has more.
-        const pokemonToFetch = famousPokemonNames.slice(0, 16);
+        const pokemonToFetch = famousPokemonNames.slice(0, 25);
 
         const pokemonData = await Promise.all(
           pokemonToFetch.map(async (name) => {
@@ -96,18 +112,31 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="container">
+      <div className="instructions">
+        <h1>Welcome to the Pokémon Memory Challenge!</h1>
+        <p>
+          Test your memory by clicking on the Pokémon as many times as you can
+          without clicking the same one twice. <br />
+          Each successful click earns you a point, and your high score will be
+          tracked. <br /> Good luck!
+        </p>
+      </div>
       <div id="score-board">
         <p>Score: {score}</p>
         <p>Max Score: {maxScore}</p>
       </div>
-      <div id="main-component">
+      <div className="game-content">
+        {" "}
+        {/* Use the grid layout container */}
         {pokemons.map((pokemon) => (
-          <div key={pokemon.id} style={{ margin: "10px", textAlign: "center" }}>
+          <div key={pokemon.id} className="pokemon-card">
+            {" "}
+            {/* Use the card class */}
             <h2>{pokemon.name}</h2>
             <img
-              className="pokimon-images"
-              src={pokemon.sprites.front_default}
+              className="pokemon-image" // Corrected class name
+              src={pokemon.sprites?.front_default || "placeholder_image.png"} // Added conditional rendering and placeholder
               alt={pokemon.name}
               onClick={() => handlePokemonClick(pokemon.id)}
             />
